@@ -1,0 +1,14 @@
+.Auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh;
+}
+
+.Auth__loginButton {
+  font-size: 2em;
+  box-shadow: 4px 4px #c82333;
+
+  padding-bottom: 10px;
+}
