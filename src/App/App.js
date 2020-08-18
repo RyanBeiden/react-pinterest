@@ -5,7 +5,6 @@ import 'firebase/auth';
 import fbConnection from '../helpers/data/connection';
 
 import MyNavbar from '../components/MyNavbar/MyNavbar';
-import Auth from '../components/Auth/Auth';
 import BoardContainer from '../components/BoardContainer/BoardContainer';
 
 import './App.scss';
@@ -39,7 +38,7 @@ class App extends React.Component {
         return <BoardContainer />;
       }
 
-      return <Auth />;
+      return null;
     };
 
     return (
