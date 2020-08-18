@@ -1,27 +1,24 @@
 import React from 'react';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import PropTypes from 'prop-types';
 
 import './MyNavbar.scss';
+import Auth from '../Auth/Auth';
 
 class MyNavbar extends React.Component {
-  logoutClickEvent = (e) => {
-    e.preventDefault();
-    firebase.auth().signOut();
+  static propTypes = {
+    authed: PropTypes.bool.isRequired,
   }
 
   render() {
     const { authed } = this.props;
 
     return (
-      <div className="MyNavbar">
-        <nav className="navbar navbar-light bg-light">
-          <h1 className="navbar-brand"><i className="fab fa-pinterest-square"></i>interest</h1>
-          <form className="form-inline">
-            {authed ? <button className="btn btn-danger MyNavbar__logoutButton" onClick={this.logoutClickEvent}>Logout <i className="fas fa-sign-out-alt pl-1"></i></button> : ''}
-          </form>
-        </nav>
-      </div>
+      <nav className="MyNavbar navbar navbar-light bg-light">
+        <h1 className="navbar-brand"><i className="fab fa-pinterest-square"></i>interest</h1>
+        <form className="form-inline">
+          <Auth authed={authed}/>
+        </form>
+      </nav>
     );
   }
 }
