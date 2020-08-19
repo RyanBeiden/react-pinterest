@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.card {
+  color: $accentColor;
+
+  button {
+    padding-bottom: 10px;
+  }
+}
