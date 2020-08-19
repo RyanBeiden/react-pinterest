@@ -26,7 +26,6 @@ class Board extends React.Component {
           <h6 className="card-title">{board.description}</h6>
           <button className="btn btn-danger" onClick={this.singleBoardClick}>View Pins</button>
         </div>
-        <div className="card-footer text-muted"></div>
       </div>
     );
   }
