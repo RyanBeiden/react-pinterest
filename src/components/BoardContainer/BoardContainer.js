@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import authData from '../../helpers/data/authData';
 import boardsData from '../../helpers/data/boardsData';
 import Board from '../Board/Board';
-import './BoardContainer.scss';
 import smash from '../../helpers/data/smash';
+import './BoardContainer.scss';
 
 class BoardContainer extends React.Component {
   static propTypes = {
@@ -18,17 +18,17 @@ class BoardContainer extends React.Component {
 
   componentDidMount() {
     boardsData.getBoardsByUid(authData.getUid())
-      .then((resp) => this.setState({ boards: resp }))
+      .then((boards) => this.setState({ boards }))
       .catch((err) => console.error('Getting the boards broke -> ', err));
   }
 
   deleteBoard = (boardId) => {
     smash.deleteBoardWithPins(boardId)
-      .then((resp) => {
-        console.error(resp);
+      .then(() => {
         boardsData.getBoardsByUid(authData.getUid())
-          .then((response) => this.setState({ boards: response.data }));
-      });
+          .then((boards) => this.setState({ boards }));
+      })
+      .catch((err) => console.error('Getting the boards broke -> ', err));
   }
 
   render() {

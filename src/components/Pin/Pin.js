@@ -24,7 +24,7 @@ class Pin extends React.Component {
       <div className="card Pin">
         <img className="card-img-top" src={pin.imageUrl} alt="Card Cap" />
         <div className="card-body">
-          <h5 className="card-title mb-0 pb-0">{pin.pinName}</h5>
+          <h5 className="card-title mb-3 pb-0">{pin.pinName}</h5>
           <button className="btn btn-danger" onClick={this.deletePinEvent}>Delete</button>
         </div>
       </div>

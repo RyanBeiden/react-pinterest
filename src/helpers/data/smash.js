@@ -7,9 +7,10 @@ const deleteBoardWithPins = (boardId) => new Promise((resolve, reject) => {
       boardPins.forEach((pin) => {
         pinsData.deletePin(pin.id);
       });
-      boardsData.deleteBoard(boardId);
-      console.error(boardPins);
-      resolve(boardPins);
+      boardsData.deleteBoard(boardId)
+        .then(() => {
+          resolve();
+        });
     })
     .catch((err) => reject(err));
 });
