@@ -54,9 +54,13 @@ class BoardContainer extends React.Component {
 
     return (
       <div>
-        <button className="btn btn-primary mt-3" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="fas fa-plus"></i></button>
+        <div className="d-flex justify-content-end">
+          <button className="btn btn-primary mt-4 mr-4" onClick={() => { this.setState({ formOpen: !formOpen }); }}>
+            <i className="fas fa-plus"></i>
+          </button>
+        </div>
         { formOpen ? <BoardForm createBoard={this.createBoard}/> : ''}
-        <div className="BoardContainer d-flex justify-content-around flex-wrap p-5">
+        <div className="BoardContainer d-flex justify-content-center flex-wrap p-2">
           {boardCard}
         </div>
       </div>
