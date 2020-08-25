@@ -42,7 +42,7 @@ class BoardContainer extends React.Component {
 
     return (
       <div>
-        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="fas fa-plus"></i></button>
+        <button className="btn btn-primary mt-3" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="fas fa-plus"></i></button>
         { formOpen ? <BoardForm /> : ''}
         <div className="BoardContainer card-columns p-5">
           {boardCard}
