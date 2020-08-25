@@ -9,6 +9,7 @@ class Board extends React.Component {
     board: boardShape.boardShape,
     setSingleBoard: PropTypes.func.isRequired,
     deleteBoard: PropTypes.func.isRequired,
+    editABoard: PropTypes.func.isRequired,
   }
 
   singleBoardClick = (e) => {
@@ -23,6 +24,12 @@ class Board extends React.Component {
     deleteBoard(board.id);
   }
 
+  editBoardEvent = (e) => {
+    e.preventDefault();
+    const { editABoard, board } = this.props;
+    editABoard(board);
+  }
+
   render() {
     const { board } = this.props;
 
@@ -32,7 +39,10 @@ class Board extends React.Component {
         <div className="card-header">{board.boardName}</div>
         <div className="card-body">
           <h6 className="card-title">{board.description}</h6>
-          <button className="btn btn-danger" onClick={this.singleBoardClick}>View Pins</button>
+          <div className="btn-group" role="group" aria-label="Basic example">
+            <button className="btn btn-danger" onClick={this.singleBoardClick}>View Pins</button>
+            <button className="btn btn-primary" onClick={this.editBoardEvent}>Edit Board</button>
+          </div>
         </div>
       </div>
     );
