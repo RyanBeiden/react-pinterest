@@ -1,15 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import authData from '../../helpers/data/authData';
 
 class BoardForm extends React.Component {
+  static propTypes = {
+    createBoard: PropTypes.func.isRequired,
+  }
+
   state = {
-    name: '',
+    boardName: '',
     description: '',
   }
 
   changeNameEvent = (e) => {
     e.preventDefault();
-    this.setState({ name: e.target.value });
+    this.setState({ boardName: e.target.value });
   }
 
   changeDescriptionEvent = (e) => {
@@ -19,15 +25,16 @@ class BoardForm extends React.Component {
 
   saveBoardEvent = (e) => {
     e.preventDefault();
-    const { name, description } = this.state;
+    const { boardName, description } = this.state;
+    const { createBoard } = this.props;
 
     const newBoard = {
-      name,
+      boardName,
       description,
       uid: authData.getUid(),
     };
 
-    console.warn('Here\'s a new baord ->', newBoard);
+    createBoard(newBoard);
   }
 
   render() {

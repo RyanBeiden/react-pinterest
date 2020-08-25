@@ -19,19 +19,31 @@ class BoardContainer extends React.Component {
     formOpen: false,
   }
 
-  componentDidMount() {
+  getBoards = () => {
     boardsData.getBoardsByUid(authData.getUid())
       .then((boards) => this.setState({ boards }))
       .catch((err) => console.error('Getting the boards broke -> ', err));
   }
 
+  componentDidMount() {
+    this.getBoards();
+  }
+
   deleteBoard = (boardId) => {
     smash.deleteBoardWithPins(boardId)
       .then(() => {
-        boardsData.getBoardsByUid(authData.getUid())
-          .then((boards) => this.setState({ boards }));
+        this.getBoards();
       })
       .catch((err) => console.error('Getting the boards broke -> ', err));
+  }
+
+  createBoard = (newBoard) => {
+    boardsData.createBoard(newBoard)
+      .then(() => {
+        this.getBoards();
+        this.setState({ formOpen: false });
+      })
+      .catch((err) => console.error('Creating a new board did not work -> ', err));
   }
 
   render() {
@@ -43,8 +55,8 @@ class BoardContainer extends React.Component {
     return (
       <div>
         <button className="btn btn-primary mt-3" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="fas fa-plus"></i></button>
-        { formOpen ? <BoardForm /> : ''}
-        <div className="BoardContainer card-columns p-5">
+        { formOpen ? <BoardForm createBoard={this.createBoard}/> : ''}
+        <div className="BoardContainer d-flex justify-content-around flex-wrap p-5">
           {boardCard}
         </div>
       </div>
