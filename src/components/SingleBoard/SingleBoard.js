@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import boardsData from '../../helpers/data/boardsData';
 import pinsData from '../../helpers/data/pinsData';
 import Pin from '../Pin/Pin';
+import PinForm from '../PinForm/PinForm';
 
 class SingleBoard extends React.Component {
   static propTypes = {
@@ -14,6 +15,7 @@ class SingleBoard extends React.Component {
   state = {
     board: {},
     pins: [],
+    formOpen: false,
   }
 
   goGetPins = () => {
@@ -42,17 +44,30 @@ class SingleBoard extends React.Component {
       .catch((err) => console.error('Delete pin failed -> ', err));
   }
 
+  createPin = (newPin) => {
+    pinsData.createPin(newPin)
+      .then(() => {
+        this.goGetPins();
+        this.setState({ formOpen: false });
+      })
+      .catch((err) => console.error('Creating the new pin did not work -> ', err));
+  }
+
   render() {
-    const { board, pins } = this.state;
-    const { setSingleBoard } = this.props;
+    const { board, pins, formOpen } = this.state;
+    const { setSingleBoard, boardId } = this.props;
 
     const pinCards = pins.map((pin) => <Pin key={pin.id} pin={pin} deletePin={this.deletePin}/>);
 
     return (
       <div>
-        <div className="d-flex justify-content-start mt-4 ml-4">
+        <div className="d-flex justify-content-between mt-4 ml-4">
           <button className="btn btn-secondary" onClick={() => { setSingleBoard(''); }}>Back</button>
+          <button className="btn btn-primary mr-4" onClick={() => { this.setState({ formOpen: !formOpen }); }}>
+            <i className="fas fa-plus"></i>
+          </button>
         </div>
+        {formOpen ? <PinForm boardId={boardId} createPin={this.createPin}/> : ''}
         <h2>{board.boardName}</h2>
         <div className="d-flex justify-content-center flex-wrap align-items-start">
           {pinCards}

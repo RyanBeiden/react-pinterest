@@ -27,7 +27,7 @@ class Board extends React.Component {
     const { board } = this.props;
 
     return (
-      <div className="card text-center">
+      <div className="card text-center m-4">
         <button className="btn btn-secondary delete-board-button" onClick={this.deleteBoardEvent}>X</button>
         <div className="card-header">{board.boardName}</div>
         <div className="card-body">
