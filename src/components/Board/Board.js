@@ -40,8 +40,8 @@ class Board extends React.Component {
         <div className="card-body">
           <h6 className="card-title">{board.description}</h6>
           <div className="btn-group" role="group" aria-label="Basic example">
-            <button className="btn btn-danger" onClick={this.singleBoardClick}>View Pins</button>
-            <button className="btn btn-primary" onClick={this.editBoardEvent}>Edit Board</button>
+            <button className="btn btn-danger" onClick={this.singleBoardClick}><i className="far fa-eye"></i></button>
+            <button className="btn btn-primary" onClick={this.editBoardEvent}><i className="fas fa-pencil-alt"></i></button>
           </div>
         </div>
       </div>
