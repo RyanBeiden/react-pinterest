@@ -17,6 +17,7 @@ class BoardContainer extends React.Component {
   state = {
     boards: [],
     formOpen: false,
+    editBoard: {},
   }
 
   getBoards = () => {
@@ -46,20 +47,39 @@ class BoardContainer extends React.Component {
       .catch((err) => console.error('Creating a new board did not work -> ', err));
   }
 
+  editABoard = (boardToEdit) => {
+    this.setState({ formOpen: true, editBoard: boardToEdit });
+  }
+
+  updateBoard = (boardId, editedBoard) => {
+    boardsData.updateBoard(boardId, editedBoard)
+      .then(() => {
+        this.getBoards();
+        this.setState({ formOpen: false });
+      })
+      .catch((err) => console.error('Updating the board did not work -> ', err));
+  }
+
   render() {
-    const { boards, formOpen } = this.state;
+    const { boards, formOpen, editBoard } = this.state;
     const { setSingleBoard } = this.props;
 
-    const boardCard = boards.map((board) => <Board key={board.id} board={board} setSingleBoard={setSingleBoard} deleteBoard={this.deleteBoard}/>);
+    const boardCard = boards.map((board) => <Board
+      key={board.id}
+      board={board}
+      setSingleBoard={setSingleBoard}
+      deleteBoard={this.deleteBoard}
+      editABoard={this.editABoard}
+    />);
 
     return (
       <div>
         <div className="d-flex justify-content-end">
           <button className="btn btn-primary mt-4 mr-4" onClick={() => { this.setState({ formOpen: !formOpen }); }}>
-            <i className="fas fa-plus"></i>
+            {formOpen ? <i className="fas fa-times"></i> : <i className="fas fa-plus"></i>}
           </button>
         </div>
-        { formOpen ? <BoardForm createBoard={this.createBoard}/> : ''}
+        { formOpen ? <BoardForm createBoard={this.createBoard} boardThatIAmEditing={editBoard} updateBoard={this.updateBoard}/> : ''}
         <div className="BoardContainer d-flex justify-content-center flex-wrap p-2">
           {boardCard}
         </div>
