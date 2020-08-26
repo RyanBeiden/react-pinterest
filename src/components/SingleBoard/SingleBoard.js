@@ -16,6 +16,7 @@ class SingleBoard extends React.Component {
     board: {},
     pins: [],
     formOpen: false,
+    editPin: {},
   }
 
   goGetPins = () => {
@@ -51,6 +52,10 @@ class SingleBoard extends React.Component {
         this.setState({ formOpen: false });
       })
       .catch((err) => console.error('Creating the new pin did not work -> ', err));
+  }
+
+  editAPin = (pinToEdit) => {
+    this.setState({ formOpen: true, editPin: pinToEdit });
   }
 
   render() {
