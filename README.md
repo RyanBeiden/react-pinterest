@@ -8,6 +8,9 @@ The User can also add new boards/pins, delete them or update their data. A full 
 
 ![React Pinterest Demo](./gifs/react-pinterest-demo.gif)
 
+## Deployed Project
+[react-pinterest-2c4ac.web.app](https://react-pinterest-2c4ac.web.app/)
+
 ## Clone the Repository
 - Clone it 👉🏼 `$ git clone https://github.com/RyanBeiden/react-pinterest.git`
 
