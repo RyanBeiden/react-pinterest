@@ -20,8 +20,8 @@ class Pin extends React.Component {
 
   editPinEvent = (e) => {
     e.preventDefault();
-    const { pins, editAPin } = this.props;
-    editAPin(pins);
+    const { pin, editAPin } = this.props;
+    editAPin(pin);
   }
 
   render() {
