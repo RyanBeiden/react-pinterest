@@ -1,10 +1,12 @@
 # React Pinterest
 
-This was my first attempt uses Firebase with React! This Web App consists of data in Firebase that will display depending on the user being authorized and only displaying their boards. You can select each board and the pins withing just that board will render.
+This was my first attempt using Firebase with React! This Web App consists of data in Firebase that will display depending on the user being authorized. You can select each board and the pins within that board will render.
+
+The User can also add new boards/pins, delete them or update their data. A full CRUD web app!
 
 ## Preview
 
-![React Pinterest Demo](./screenshots/react-pinterest-demo.png)
+![React Pinterest Demo](./gifs/react-pinterest-demo.gif)
 
 ## Clone the Repository
 - Clone it 👉🏼 `$ git clone https://github.com/RyanBeiden/react-pinterest.git`
