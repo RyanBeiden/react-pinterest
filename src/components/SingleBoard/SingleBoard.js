@@ -16,6 +16,7 @@ class SingleBoard extends React.Component {
     board: {},
     pins: [],
     formOpen: false,
+    editPin: {},
   }
 
   goGetPins = () => {
@@ -53,21 +54,48 @@ class SingleBoard extends React.Component {
       .catch((err) => console.error('Creating the new pin did not work -> ', err));
   }
 
+  editAPin = (pinToEdit) => {
+    this.setState({ formOpen: true, editPin: pinToEdit });
+  }
+
+  updatePin = (pinId, editedPin) => {
+    pinsData.updatePin(pinId, editedPin)
+      .then(() => {
+        this.goGetPins();
+        this.setState({ formOpen: false });
+      })
+      .catch((err) => console.error('Updating the pin did not work -> ', err));
+  }
+
   render() {
-    const { board, pins, formOpen } = this.state;
+    const {
+      board,
+      pins,
+      formOpen,
+      editPin,
+    } = this.state;
     const { setSingleBoard, boardId } = this.props;
 
-    const pinCards = pins.map((pin) => <Pin key={pin.id} pin={pin} deletePin={this.deletePin}/>);
+    const pinCards = pins.map((pin) => <Pin
+      key={pin.id}
+      pin={pin}
+      deletePin={this.deletePin}
+      editAPin={this.editAPin}
+    />);
 
     return (
       <div>
         <div className="d-flex justify-content-between mt-4 ml-4">
-          <button className="btn btn-secondary" onClick={() => { setSingleBoard(''); }}>Back</button>
-          <button className="btn btn-primary mr-4" onClick={() => { this.setState({ formOpen: !formOpen }); }}>
-            <i className="fas fa-plus"></i>
-          </button>
+          <button className="btn btn-secondary" onClick={() => { setSingleBoard(''); this.setState({ formOpen: false }); }}>Back</button>
+          {formOpen ? <button className="btn btn-primary mr-4" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="fas fa-times"></i></button>
+            : <button className="btn btn-primary mr-4" onClick={() => { this.setState({ formOpen: !formOpen, editPin: {} }); }}><i className="fas fa-plus"></i></button>}
         </div>
-        {formOpen ? <PinForm boardId={boardId} createPin={this.createPin}/> : ''}
+        {formOpen ? <PinForm
+          boardId={boardId}
+          createPin={this.createPin}
+          pinThatIAmEditing={editPin}
+          updatePin={this.updatePin}
+        /> : ''}
         <h2>{board.boardName}</h2>
         <div className="d-flex justify-content-center flex-wrap align-items-start">
           {pinCards}

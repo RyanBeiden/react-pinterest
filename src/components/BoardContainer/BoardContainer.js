@@ -76,7 +76,7 @@ class BoardContainer extends React.Component {
       <div>
         <div className="d-flex justify-content-end">
           {formOpen ? <button className="btn btn-primary mt-4 mr-4" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="fas fa-times"></i></button>
-            : <button className="btn btn-primary mt-4 mr-4" onClick={() => { this.setState({ formOpen: !formOpen, editBoard: '' }); }}><i className="fas fa-plus"></i></button>}
+            : <button className="btn btn-primary mt-4 mr-4" onClick={() => { this.setState({ formOpen: !formOpen, editBoard: {} }); }}><i className="fas fa-plus"></i></button>}
         </div>
         { formOpen ? <BoardForm createBoard={this.createBoard} boardThatIAmEditing={editBoard} updateBoard={this.updateBoard}/> : ''}
         <div className="BoardContainer d-flex justify-content-center flex-wrap p-2">
